@@ -1,3 +1,6 @@
+import timeit
+
+code_to_test = """
 from collections import OrderedDict
 
 def custom_sort(ordered_dict, by_values=False):
@@ -9,9 +12,9 @@ def custom_sort(ordered_dict, by_values=False):
         key, value = list_copy.pop(list_copy.index(min_item))
         ordered_dict[key] = value
 
-data1 = OrderedDict(e=11, b=22, a=99, g=33, c=33, d=33, h=99, f=77, i=88, k=44)
+data1 = OrderedDict({str(i): i for i in range(10000)})
 custom_sort(data1, by_values=True)
+"""
 
-print(*data1.items())
-
-
+elapsed_time = timeit.timeit(code_to_test, number=1)
+print(elapsed_time)
